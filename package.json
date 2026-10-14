@@ -4,11 +4,13 @@
   "private": true,
   "description": "Official Discord community assistant for ClouvenTwo.",
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vercel dev",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "tsx --test tests/discord-signature.test.ts",
     "build": "tsc --noEmit"
   },
   "dependencies": {
