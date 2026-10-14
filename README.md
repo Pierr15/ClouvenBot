@@ -6,6 +6,7 @@ Official Discord community assistant for ClouvenTwo, built with TypeScript, disc
 
 - Discord HTTP interactions on Vercel Functions; no persistent Gateway process.
 - Ed25519 signature verification over the exact raw request body with a five-minute timestamp window.
+- Vercel automatic body parsing is disabled for the interactions route, and request bodies are capped at 1 MiB.
 - Basic slash commands: `/help`, `/health`, and `/version`.
 - Public health endpoint at `GET /api/health`.
 - Automated signature tests and GitHub Actions CI.
@@ -23,7 +24,7 @@ Official Discord community assistant for ClouvenTwo, built with TypeScript, disc
 1. Install dependencies: `npm install`
 2. Copy `.env.example` to `.env.local`.
 3. Set `DISCORD_PUBLIC_KEY` from the Discord Developer Portal.
-4. Run `npm run typecheck` and `npm test`.
+4. Run `npm run typecheck`, `npm test`, and `npm run build`.
 5. Run `npm run dev` to start Vercel local development.
 
 The interactions endpoint is `/api/interactions`. Configure the Discord Developer Portal Interactions Endpoint URL to your deployed URL plus `/api/interactions`. Discord requires this URL to be publicly reachable and to pass its signed PING challenge.
@@ -51,7 +52,8 @@ The health endpoint reports only service status and environment name. Do not exp
 
 ## Security boundaries
 
-- Discord interaction signatures are verified against the exact raw request bytes before parsing JSON.
+- Discord interaction signatures are verified against the exact raw request bytes before parsing JSON; Vercel body parsing is disabled for that route.
+- Interaction payloads larger than 1 MiB are rejected.
 - Unknown HTTP methods are rejected.
 - The bot does not use a persistent Discord Gateway.
 - The initial MVP has no administrative commands and no ClouvenTwo write integration.
