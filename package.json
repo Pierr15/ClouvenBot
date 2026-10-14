@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "vercel dev",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/discord-signature.test.ts tests/commands.test.ts",
+    "test": "tsx --test tests/discord-signature.test.ts tests/commands.test.ts tests/interactions.test.ts",
     "build": "tsc --noEmit"
   },
   "dependencies": {
